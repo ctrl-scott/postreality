@@ -1,0 +1,44 @@
+/* --- Admin layout cleanup --- */
+.topnav { margin-top: .25rem; }
+.topnav a { color: var(--muted); margin-right: .75rem; text-decoration: none; }
+.topnav a.active, .topnav a:hover { color: var(--text); }
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+.labels { display: grid; gap: .9rem; padding-top: .2rem; }
+.labels label, .label-block { color: var(--muted); font-weight: 600; }
+.inputs { display: grid; gap: .8rem; }
+
+.inline { margin-right: 1rem; }
+.status-row { display: flex; gap: 1rem; align-items: center; }
+
+.editor-wrap { margin-top: .2rem; }
+.editor-wrap textarea {
+  width: 100%;
+  min-height: 360px;
+  resize: vertical;
+  padding: .8rem 1rem;
+  line-height: 1.45;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.action-row { display: flex; gap: .5rem; margin-top: .4rem; }
+
+.upload-row { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+
+.post-list { display: grid; gap: .5rem; }
+.post-list button {
+  width: 100%;
+  text-align: left;
+  background: #0f1116;
+  border: 1px solid #22262e;
+  padding: .6rem .8rem;
+  border-radius: 8px;
+}
+.post-list button:hover { border-color: var(--accent); }
+
+.small { font-size: .9rem; }

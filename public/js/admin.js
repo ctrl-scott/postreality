@@ -1,5 +1,7 @@
 async function fetchJSON(url, opts) {
-async function refreshPostList() {
+
+
+/*async function refreshPostList() {
 const list = await fetchJSON('/api/posts?limit=100&offset=0'); // published only; change server if you want drafts here
 const box = $('#postList');
 box.innerHTML = '';
@@ -10,7 +12,19 @@ btn.onclick = () => loadPost(p.id);
 btn.style.margin = '0.25rem';
 box.appendChild(btn);
 }
-}
+}*/
+	async function refreshPostList() {
+	  const list = await fetchJSON('/api/posts?status=all&limit=100&offset=0');
+	  const box = $('#postList');
+	  box.innerHTML = '';
+	  for (const p of list) {
+	    const btn = document.createElement('button');
+	    btn.textContent = `#${p.id} • ${p.title} (${p.status})`;
+	    btn.onclick = () => loadPost(p.id);
+	    btn.style.margin = '0.25rem';
+	    box.appendChild(btn);
+	  }
+	}
 
 
 async function loadPost(id) {

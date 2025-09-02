@@ -1,51 +1,80 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PostReality Admin</title>
-<link rel="stylesheet" href="/css/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — PostReality</title>
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<header class="container"><h1>Admin — PostReality</h1></header>
-<main class="container">
-<form id="postForm" class="card">
-<label>Title<input type="text" id="title" required /></label>
-<label>Slug (optional)<input type="text" id="slug" placeholder="auto from title" /></label>
-<label>Source Type
-<select id="sourceType">
-<option value="markdown" selected>Markdown</option>
-<option value="html">HTML (sanitized)</option>
-</select>
-</label>
-<label>Content<textarea id="content" rows="12" required></textarea></label>
-<fieldset>
-<legend>Status</legend>
-<label><input type="radio" name="status" value="draft" checked /> Draft</label>
-<label><input type="radio" name="status" value="published" /> Published</label>
-</fieldset>
-<div class="row">
-<button type="submit" id="createBtn">Create</button>
-<button type="button" id="updateBtn" disabled>Update</button>
-<button type="button" id="deleteBtn" disabled class="danger">Delete</button>
-</div>
-</form>
+  <header class="container">
+    <h1>Admin — PostReality</h1>
+    <nav class="topnav">
+      <a href="/">Home</a>
+      <a class="active" href="/admin">Admin</a>
+    </nav>
+  </header>
 
+  <main class="container">
+    <!-- Editor card -->
+    <section class="card">
+      <form id="postForm" class="admin-grid">
+        <!-- left column: labels -->
+        <div class="labels">
+          <label for="title">Title:</label>
+          <label for="slug">Slug:</label>
+          <label for="sourceType">Source Type:</label>
+          <div class="label-block">Status:</div>
+        </div>
 
-<section class="card">
-<h2>Upload files</h2>
-<input type="file" id="fileInput" />
-<button id="uploadBtn">Upload</button>
-<div id="uploadStatus" class="muted"></div>
-<div id="files" class="file-grid"></div>
-</section>
+        <!-- right column: inputs -->
+        <div class="inputs">
+          <input type="text" id="title" required placeholder="Post title" />
+          <input type="text" id="slug" placeholder="auto from title" />
+          <select id="sourceType">
+            <option value="markdown" selected>Markdown</option>
+            <option value="html">HTML (sanitized)</option>
+          </select>
 
+          <div class="status-row">
+            <label class="inline"><input type="radio" name="status" value="draft" checked /> Draft</label>
+            <label class="inline"><input type="radio" name="status" value="published" /> Published</label>
+          </div>
 
-<section class="card">
-<h2>Existing posts</h2>
-<div id="postList"></div>
-</section>
-</main>
-<script src="/js/admin.js"></script>
+          <div class="editor-wrap">
+            <textarea id="content" rows="18" placeholder="Write your post here…"></textarea>
+          </div>
+
+          <div class="action-row">
+            <button type="submit" id="createBtn">Create</button>
+            <button type="button" id="updateBtn" disabled>Update</button>
+            <button type="button" id="deleteBtn" disabled class="danger">Delete</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Uploads -->
+    <section class="card">
+      <h2>Upload files</h2>
+      <div class="upload-row">
+        <input type="file" id="fileInput" />
+        <button id="uploadBtn">Upload</button>
+      </div>
+      <div id="uploadStatus" class="muted"></div>
+      <div id="files" class="file-grid"></div>
+    </section>
+
+    <!-- Posts list -->
+    <section class="card">
+      <div class="list-header">
+        <h2>Existing posts</h2>
+        <div class="muted small">Showing drafts and published</div>
+      </div>
+      <div id="postList" class="post-list"></div>
+    </section>
+  </main>
+
+  <script src="/js/admin.js"></script>
 </body>
 </html>
