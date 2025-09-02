@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PostReality Admin</title>
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<header class="container"><h1>Admin — PostReality</h1></header>
+<main class="container">
+<form id="postForm" class="card">
+<label>Title<input type="text" id="title" required /></label>
+<label>Slug (optional)<input type="text" id="slug" placeholder="auto from title" /></label>
+<label>Source Type
+<select id="sourceType">
+<option value="markdown" selected>Markdown</option>
+<option value="html">HTML (sanitized)</option>
+</select>
+</label>
+<label>Content<textarea id="content" rows="12" required></textarea></label>
+<fieldset>
+<legend>Status</legend>
+<label><input type="radio" name="status" value="draft" checked /> Draft</label>
+<label><input type="radio" name="status" value="published" /> Published</label>
+</fieldset>
+<div class="row">
+<button type="submit" id="createBtn">Create</button>
+<button type="button" id="updateBtn" disabled>Update</button>
+<button type="button" id="deleteBtn" disabled class="danger">Delete</button>
+</div>
+</form>
+
+
+<section class="card">
+<h2>Upload files</h2>
+<input type="file" id="fileInput" />
+<button id="uploadBtn">Upload</button>
+<div id="uploadStatus" class="muted"></div>
+<div id="files" class="file-grid"></div>
+</section>
+
+
+<section class="card">
+<h2>Existing posts</h2>
+<div id="postList"></div>
+</section>
+</main>
+<script src="/js/admin.js"></script>
+</body>
+</html>

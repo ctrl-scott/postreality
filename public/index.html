@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PostReality — A Modular Blog</title>
+<link rel="stylesheet" href="/css/styles.css" />
+<meta name="description" content="PostReality is a modular, extensible weblog platform built with Node.js, MySQL, and modern front-end technologies." />
+</head>
+<body>
+<header class="container">
+<h1>PostReality</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/admin">Admin</a>
+</nav>
+</header>
+
+
+<main class="container">
+<section id="posts">
+<noscript>
+<p>Please enable JavaScript to view posts.</p>
+</noscript>
+</section>
+</main>
+
+
+<footer class="container">
+<p class="muted">© <span id="year"></span> PostReality — Built with Node.js, MySQL, and ❤️</p>
+</footer>
+
+
+<script src="/js/main.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

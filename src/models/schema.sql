@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS postreality CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE postreality;
+
+
+-- Posts
+CREATE TABLE IF NOT EXISTS posts (
+id INT AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+slug VARCHAR(255) NOT NULL UNIQUE,
+content_html MEDIUMTEXT NOT NULL,
+content_src MEDIUMTEXT NULL, -- optional raw source (eg. Markdown)
+status ENUM('draft','published') NOT NULL DEFAULT 'draft',
+created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Files
+CREATE TABLE IF NOT EXISTS files (
+id INT AUTO_INCREMENT PRIMARY KEY,
+post_id INT NULL, -- optional association
+original_name VARCHAR(255) NOT NULL,
+stored_name VARCHAR(255) NOT NULL,
+ext VARCHAR(16) NOT NULL,
+mime_type VARCHAR(128) NOT NULL,
+size_bytes INT NOT NULL,
+url VARCHAR(512) NOT NULL,
+created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+KEY (post_id),
+CONSTRAINT fk_files_post
+FOREIGN KEY (post_id) REFERENCES posts(id)
+ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE INDEX IF NOT EXISTS idx_posts_status_created ON posts(status, created_at);
