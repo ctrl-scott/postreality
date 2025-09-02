@@ -1,9 +1,10 @@
-CREATE DATABASE IF NOT EXISTS postreality CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+DROP DATABASE postreality;
+CREATE DATABASE postreality CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE postreality;
 
 
 -- Posts
-CREATE TABLE IF NOT EXISTS posts (
+CREATE TABLE posts (
 id INT AUTO_INCREMENT PRIMARY KEY,
 title VARCHAR(255) NOT NULL,
 slug VARCHAR(255) NOT NULL UNIQUE,
@@ -16,7 +17,7 @@ updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTA
 
 
 -- Files
-CREATE TABLE IF NOT EXISTS files (
+CREATE TABLE  files (
 id INT AUTO_INCREMENT PRIMARY KEY,
 post_id INT NULL, -- optional association
 original_name VARCHAR(255) NOT NULL,
@@ -33,4 +34,4 @@ ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE INDEX IF NOT EXISTS idx_posts_status_created ON posts(status, created_at);
+CREATE INDEX idx_posts_status_created ON posts(status, created_at);
