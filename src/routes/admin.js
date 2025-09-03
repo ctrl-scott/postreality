@@ -1,3 +1,5 @@
+//src/routes
+
 import { Router } from 'express';
 import basicAuth from 'express-basic-auth';
 import { apiCreatePost, apiUpdatePost, apiDeletePost } from '../controllers/postsController.js';

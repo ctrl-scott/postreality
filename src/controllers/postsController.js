@@ -32,12 +32,22 @@ const SANITIZE_OPTS = {
 };
 
 export async function apiListPosts(req, res) {
+  const status = (req.query.status || 'published').toLowerCase(); // 'published' | 'draft' | 'all'
+  const limit  = Number(req.query.limit || 20);
+  const offset = Number(req.query.offset || 0);
+
+  const rows = await listPosts({ limit, offset, status });
+  res.json(rows);
+}
+
+
+/*export async function apiListPosts(req, res) {
   const rows = await listPosts({
     limit: Number(req.query.limit || 20),
     offset: Number(req.query.offset || 0)
   });
   res.json(rows);
-}
+}*/
 
 export async function apiGetPost(req, res) {
   const idOrSlug = req.params.idOrSlug;

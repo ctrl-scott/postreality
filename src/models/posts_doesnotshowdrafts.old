@@ -1,21 +1,19 @@
-// src/models/posts.js
 import { query } from '../config/db.js';
 
 export async function listPosts({ limit = 20, offset = 0, status = 'published' } = {}) {
+  // Validate & clamp to safe integers, then inline (no placeholders for LIMIT/OFFSET)
   const lim = Number.isFinite(Number(limit)) ? Math.max(0, parseInt(limit, 10)) : 20;
   const off = Number.isFinite(Number(offset)) ? Math.max(0, parseInt(offset, 10)) : 0;
 
-  const where = (status && status !== 'all') ? 'WHERE status = ?' : '';
-  const params = (status && status !== 'all') ? [status] : [];
-
   const sql = `
-    SELECT id, title, slug, content_html, status, created_at, updated_at
+    SELECT id, title, slug, content_html, created_at, updated_at
     FROM posts
-    ${where}
+    WHERE status = ?
     ORDER BY created_at DESC
     LIMIT ${lim} OFFSET ${off}
   `;
-  return query(sql, params);
+
+  return query(sql, [status]);
 }
 
 export async function getPostById(id) {
